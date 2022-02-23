@@ -83,6 +83,8 @@ def int_checker(msg):
     data = input(msg)
     try:
         data = int(data)
+        if data < 1:  # Disallows 0 or below as valid input
+            raise ValueError
         confirm = input("Confirm? (y/n) ").lower()
         if confirm == 'y':
             return data
@@ -92,7 +94,7 @@ def int_checker(msg):
             print(f"{confirm} is not a valid option, please enter again")
             return int_checker(msg)
     except ValueError:  # Catching errors so program doesn't crash
-        print(f"{data} is not a number, please enter again")
+        print(f"{data} is either invalid or not a number, please enter again")
         return int_checker(msg)
 
 
