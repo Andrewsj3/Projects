@@ -21,22 +21,25 @@ def main():
 
 
 def float_checker(msg, confirm=True):
-    # Converts input to float but asks user to confirm before returning
+    # Converts input to float but can ask user to confirm before returning
     data = input(msg)
     try:
         data = float(data)
+        if data < 0 and data != -1:  # Prevents price from being negative
+            raise ValueError
         if confirm:
             if input("Confirm? (y/n) ").lower() == 'y':
                 return data
             else:
                 return float_checker(msg, confirm=confirm)
+            # Keeps confirm settings from when the function was last called
         elif not confirm:
             return data
         else:
             print(f"{confirm} is not a valid option, please enter again")
             return float_checker(msg, confirm=confirm)
     except ValueError:  # Catching errors so program doesn't crash
-        print(f"{data} is not a number, please enter again")
+        print(f"{data} is either invalid or not a number, please enter again")
         return float_checker(msg, confirm=confirm)
 
 
