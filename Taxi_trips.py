@@ -49,14 +49,15 @@ def int_checker(msg, confirm=True):
             else:
                 return int_checker(msg, confirm=confirm)
                 # confirm=confirm remembers the value of the parameter when the
-                #
+                # function was last called
         elif not confirm:
             return data
         else:
             print(f"{confirm} is not a valid option, please enter again")
             return int_checker(msg, confirm=confirm)
     except ValueError:  # Catching errors so program doesn't crash
-        print(f"{data} is either invalid or not an integer, please enter again")
+        print(f"{data} is either invalid or not an integer,"
+              f" please enter again")
         return int_checker(msg, confirm=confirm)
 
 

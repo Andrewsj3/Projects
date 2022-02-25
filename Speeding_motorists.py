@@ -63,7 +63,7 @@ def validate_name(prompt):  # Tests input against a number of regex patterns
             continue
 
         else:  # If input matches no known 'bad' patterns, theoretically
-            # shouldn't happen
+            # should only happen in the case of non alphanumeric character
             print("Invalid name")
             continue
 
@@ -91,10 +91,11 @@ def int_checker(msg):
         return int_checker(msg)
 
 
-def calc_fine(speed):
+def calc_fine(speed):  # Calculates fines
     if speed < 10:
         return 30
-    elif speed in range(11, 15):
+    elif speed in range(11, 15):  # Using range instead of 'if speed >= number
+        # and speed < number'
         return 80
     elif speed in range(15, 20):
         return 120

@@ -13,6 +13,8 @@ def main():
                 break
             else:
                 f_name, s_name, days_absent = data.split()
+            # Below regex patterns ensure name entered follows format
+            # First Last
             if not re.fullmatch(r"^[A-Z][a-z]+$", f_name):
                 print("That is an invalid first name.")
 
@@ -26,6 +28,7 @@ def main():
                 print("Employee details recorded.")
                 days_absent = int(days_absent)
                 employees[f"{f_name} {s_name}"] = days_absent
+                # Recording employee data
                 if days_absent == 0:
                     non_absentees.append(f"{f_name} {s_name}")
 
@@ -36,7 +39,7 @@ def main():
     print_statistics(non_absentees, employees, above_avg_absence)
 
 
-def avg(__obj):
+def avg(__obj):  # Finds average value in list of values
     days = 0
     for _, num in __obj:
         days += num
@@ -56,6 +59,7 @@ def print_statistics(non_absentees, employees, above_avg_absence):
             if days > average:
                 above_avg_absence.append(people)
         person = max(employees, key=employees.get)
+        # Finds person with most days of absence using the key parameter
         print(f"{person} had the most days absent with {employees.get(person)}"
               f" days off.\n")
         print("\nThose who had no days of absence this year were:")
