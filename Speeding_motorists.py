@@ -32,15 +32,11 @@ def validate_name(prompt):  # Tests input against a number of regex patterns
     # to ensure it is a valid name
     import re
     while True:
-        name = input(prompt)
+        name = input(prompt).title()
         if name == '$':
             return 0
-        if re.search(r"^[A-Z][a-z]+-[A-Z][a-z]+\s[a-z]+$", name) or\
-           re.search(r"\b(Mc|Mac)[A-z][a-z]+", name) or\
-           re.search(r"^[A-Z][a-z]+\svan\s(der\s)?[A-Z][a-z]+$", name) or\
-           re.search(r"^[A-Z][a-z]+\s[A-Z][a-z]+$", name):
-            break  # All valid patterns, rest of patterns are invalid
-        elif not re.search(r".", name):
+        # All invalid patterns except the last one
+        if not re.search(r".", name):
             print("Name cannot be blank, please enter again")
             continue
 
@@ -48,28 +44,16 @@ def validate_name(prompt):  # Tests input against a number of regex patterns
             print("Numbers are not allowed, please enter again")
             continue
 
-        elif re.search(r"\b[a-z]", name):
-            print("Names must start with a capital letter, please enter again")
-            continue
-
         elif re.search(r"\s\s", name):
             print("Two or more spaces are not allowed, please enter again")
             continue
 
-        elif re.search(r"[!@#$%^&*()_+=\[\]{};'\":|,.<>/?]", name):
+        elif re.search(r"[!@#$%^&*()_+-=\[\]{};'\":|,.<>/?]", name):
             print("Special characters are not allowed, please enter again")
             continue
 
-        elif not re.search(r"\A\w+\s\w+$", name) and \
-                not re.search(r"\A\w+-?\w+\s\w+-?\w+$", name):
-            print("Please enter a first name and a last name")
-            continue
-
-        elif re.search(r"\b\w[a-z]*[A-Z]+",
-                       name):
-            print("No capital letters allowed in the middle of the name,"
-                  " please enter again")
-            continue
+        elif re.fullmatch(r"^\D+\s\D+$", name):
+            break
 
         else:  # If input matches no known 'bad' patterns, theoretically
             # should only happen in the case of non alphanumeric character
