@@ -1,3 +1,12 @@
+"""This program asks for a driver name and then continually asks the user to
+start a new trip. The user then enters the time of the trip in minutes and the
+program outputs the fee. When the user enters 'n', the program displays the
+driver's name, and totals and averages for cost and time (see lines 27-31).
+Jack Andrews
+24/2/22
+"""
+
+
 def main():
     # Initializing data to keep count of totals and averages
     trip_list = []

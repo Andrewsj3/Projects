@@ -1,3 +1,13 @@
+"""This program keeps track of employee absences. It continually asks the user
+to input the employee's full name along with the amount of days off. When the
+user enters '$', the program outputs the average days of absence per year per
+employee, the employee with the most days absent, those who had no days of
+absence, and those who were absent for longer than average.
+Jack Andrews
+25/2/22
+"""
+
+
 def main():
     import re
     employees = {}
@@ -13,7 +23,7 @@ def main():
                 break
             else:
                 f_name, s_name, days_absent = data.split()
-            # Below regex patterns ensure name entered follows format
+            # Below regex patterns ensure name entered follows the format
             # First Last
             if not re.fullmatch(r"^[A-Z][a-z]+$", f_name):
                 print("That is an invalid first name.")

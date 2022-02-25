@@ -1,3 +1,13 @@
+"""This program creates an auction where the user selects the object to be
+auctioned and its reserve price. Then the bidding starts. Each bid has to be
+higher than the last, until -1 is entered, which ends the auction. If the final
+bid is above the reserve price, the auction is a success, otherwise it has
+failed.
+Jack Andrews
+23/2/22
+"""
+
+
 def main():
     item = input("What is the auction for? ")
     reserve_price = float_checker("What is the reserve price? ")

@@ -1,3 +1,12 @@
+"""This program is designed to let a police officer enter the name of a speeder
+and how fast they were going. The program calculates the fine and displays the
+output. This continues until the officer enters '$', which ends the main loop
+and displays all data to the officer.
+Jack Andrews
+25/2/22
+"""
+
+
 def main():
     speeders = {}
     wanted_for_arrest = ["James Wilson", "Helga Norman", "Zachary Conroy"]
