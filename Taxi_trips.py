@@ -29,9 +29,10 @@ def main():
             # time taken
             print(f"The driver today was {driver}.")
             print(f"Total time of all trips was {total_mins} minutes.")
-            print(f"Average time for each trip was {avg(trip_list)} minutes.")
+            print(f"Average time for each trip was {avg(trip_list):.2f}"
+                  f" minutes.")
             print(f"Total income for today is ${total_cost}.")
-            print(f"Average cost of each trip was ${avg(trip_cost)}.")
+            print(f"Average cost of each trip was ${avg(trip_cost):.2f}.")
             exit(0)
         else:  # Handling unexpected input so program doesn't crash
             print("Invalid input, please enter again.")
