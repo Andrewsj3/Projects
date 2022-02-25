@@ -14,33 +14,30 @@ def main():
     non_absentees = []
     above_avg_absence = []
     print("Please enter names of employees below along with amount of days "
-          "absent. Make sure to capitalize employee names."
-          "\nEnter $ to terminate input and display statistics.")
+          "absent.\nEnter $ to terminate input and display statistics.")
     while True:
         try:
-            data = input(">>> ")
+            data = input(">>> ").title()
             if data == '$':
                 break
             else:
                 f_name, s_name, days_absent = data.split()
-            # Below regex patterns ensure name entered follows the format
-            # First Last
-            if not re.fullmatch(r"^[A-Z][a-z]+$", f_name):
-                print("That is an invalid first name.")
+            # Below regex patterns ensure name entered is valid
 
-            elif not re.fullmatch(r"^[A-Z][a-z]+$", s_name):
-                print("That is an invalid surname.")
-
-            elif not re.fullmatch(r"^\d+$", days_absent):
+            if not days_absent.isdigit():
                 print("You must enter a number for days absent.")
 
-            elif re.search(r"^[A-Z][a-z]+\s[A-Z][a-z]+\s\d+$", data):
+            elif re.fullmatch(r"^[A-Z][a-z]+$", f_name) and\
+            re.fullmatch(r"^[A-Z][a-z]+$", s_name):
                 print("Employee details recorded.")
                 days_absent = int(days_absent)
                 employees[f"{f_name} {s_name}"] = days_absent
                 # Recording employee data
                 if days_absent == 0:
                     non_absentees.append(f"{f_name} {s_name}")
+
+            else:
+                print("Names are invalid.")
 
         except ValueError:
             print("You are expected to enter a first name, a last name, "
