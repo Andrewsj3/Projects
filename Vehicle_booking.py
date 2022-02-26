@@ -18,13 +18,13 @@ def main():
         seats = int_checker("How many seats are needed? (Enter -1 to quit) ")
         if seats == 0:  # Value returned if user enters -1
             break
-        print_vehicles(available, seats)
+        print_vehicles(cars, seats)
         idx, name = book_vehicle(cars, available, seats)
-        del available[idx]
-        hired.append((idx, name))
+        del available[cars.index(cars[idx])]
+        hired.append((idx+1, cars[idx][0], name))
     print("Vehicles booked today:")
-    for car_idx, hirer in hired:
-        print(f"No. {car_idx + 1} - {cars[car_idx][0]} - Booked by: {hirer}")
+    for car_idx, car, hirer in hired:
+        print(f"No. {car_idx} - {car} - Booked by: {hirer}")
 
 
 def int_checker(msg, confirm=True):
@@ -56,20 +56,24 @@ def int_checker(msg, confirm=True):
 
 def print_vehicles(vehicles, req_seats):
     warn = "(Not enough seats)"  # Warns user if car doesn't have enough seats
-    for number, vehicle_data in enumerate(vehicles, start=1):
-        vehicle, seats = vehicle_data
+    for number, (vehicle, seats) in enumerate(vehicles, start=1):
         print(f"{number}) {vehicle}, seats: {seats}"
               f" {warn if req_seats > seats else ''}")
 
 
 def book_vehicle(vehicles, available_vehicles, seats):
     vehicle_to_book = int_checker("\nWhich vehicle do you want to book? ") - 1
-    if available_vehicles[vehicle_to_book][1] < seats:
+    hiace = (vehicles[vehicle_to_book][0] == "Toyota Hiace")
+    if vehicles[vehicle_to_book][1] < seats:
         print("This vehicle does not have enough seats, please enter again.")
-        # Failsafe to ensure user cannot accidentally book wrong car
         return book_vehicle(vehicles, available_vehicles, seats)
-    name = input("Enter your name: ").capitalize()
-    print(f"{available_vehicles[vehicle_to_book][0]} booked by {name}\n")
+        # Failsafe to ensure user cannot accidentally book wrong car
+    if vehicles[vehicle_to_book] not in available_vehicles:
+        # Failsafe to ensure user cannot book already hired car
+        print("This vehicle is already hired, please enter again.")
+        return book_vehicle(vehicles, available_vehicles, seats)
+    name = input("Enter your name: ").title()
+    print(f"{vehicles[vehicle_to_book][0]} booked by {name}\n")
     return vehicle_to_book, name
     # Returning number of vehicle and hirer to be used in other functions
 
